@@ -1,29 +1,29 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  imports: [FormsModule]
 })
 export class LoginComponent {
-  username: string = ''; // Variable para el usuario
-  password: string = ''; // Variable para la contraseña
-  loginMessage: string = ''; // Mensaje de error o éxito
-  isError: boolean = false; // Si hay un error o no
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  // Datos "quemados" para usuario y contraseña
-  private readonly validUsername: string = 'admin';
-  private readonly validPassword: string = '123456';
+  private readonly validUsername = 'admin';
+  private readonly validPassword = '123456';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   onLogin() {
     if (this.username === this.validUsername && this.password === this.validPassword) {
-      this.loginMessage = 'Login exitoso.';
-      this.isError = false;
+      this.router.navigate(['/dashboard']);
     } else {
-      this.loginMessage = 'Usuario o contraseña incorrectos.';
-      this.isError = true;
+      this.errorMessage = 'Usuario o contraseña inválidos.';
     }
   }
 }
