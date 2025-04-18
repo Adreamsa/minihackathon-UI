@@ -22,20 +22,20 @@ export class ListComponent implements OnInit {
   }
 
   fetchItems() {
-    this.http.get(`https://api.example.com/${this.type}`).subscribe((data: any) => {
+    this.http.get(`http://localhost:8080/api/${this.type}`).subscribe((data: any) => {
       this.items = data;
     });
   }
 
-  viewItem(itemId: string) {
+  viewItem(itemId: number) {
     alert(`Ver detalles del ID: ${itemId}`);
   }
 
-  updateItem(itemId: string) {
+  updateItem(itemId: number) {
     alert(`Actualizar el ID: ${itemId}`);
   }
 
-  deleteItem(itemId: string) {
+  deleteItem(itemId: number) {
     alert(`Eliminar el ID: ${itemId}`);
   }
 }
