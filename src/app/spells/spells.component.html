@@ -1,1 +1,39 @@
-<p>spells works!</p>
+<!-- src/app/spell/spell-list/spell-list.component.html -->
+<div class="container">
+  <h2>Hechizos</h2>
+  <button routerLink="/spells/new" class="btn btn-primary mb-3">
+    Nuevo Hechizo
+  </button>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <table class="table table-striped" *ngIf="spells.length">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Dificultad</th>
+      <th>Requiere Vara</th>
+      <th>Creado el</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let s of spells">
+      <td>{{ s.name }}</td>
+      <td>{{ s.type }}</td>
+      <td>{{ s.difficulty }}</td>
+      <td>{{ s.requiresWand ? 'Sí' : 'No' }}</td>
+      <td>{{ s.createdAt | date }}</td>
+      <td>
+        <button (click)="edit(s.id!)" class="btn btn-sm btn-warning">Editar</button>
+        <button (click)="delete(s.id!)" class="btn btn-sm btn-danger">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!spells.length && !error" class="alert alert-info">
+    No hay hechizos aún.
+  </div>
+</div>
